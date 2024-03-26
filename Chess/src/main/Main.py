@@ -29,18 +29,24 @@ def main():
         clock.tick(MAX_FPS)
         pg.display.flip()
         drawBoard(screen)
+        drawPieces(screen, gameState.board)
 
 
 def drawBoard(screen):
     colors = [pg.Color("white"), pg.Color("darkgreen")]
-    for i in range(DIMENSIONS):
-        for j in range(DIMENSIONS):
-            color = colors[(i+j) % 2]
-            pg.draw.rect(screen, color, pg.Rect(j*SQUARE_SIZE, i*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+    for row in range(DIMENSIONS):
+        for col in range(DIMENSIONS):
+            color = colors[(row+col) % 2]
+            pg.draw.rect(screen, color, pg.Rect(col*SQUARE_SIZE, row*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
 
 
 def drawPieces(screen, board):
-    pass
+    for row in range(DIMENSIONS):
+        for col in range(DIMENSIONS):
+            piece = board[row][col]
+            if piece != "--": # not empty square
+                screen.blit(IMAGES[piece], pg.Rect(col*SQUARE_SIZE, row*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+
 
 
 def drawGameState(screen, gameState):

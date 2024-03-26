@@ -48,6 +48,9 @@ def main():
                     gameState.makeMove(move)
                     squareSelected = ()
                     playerClicks = []
+            elif event.type == pg.KEYDOWN:
+                if event.key == pg.K_z:
+                    gameState.undoMove()
 
         drawGameState(screen, gameState)
         clock.tick(MAX_FPS)

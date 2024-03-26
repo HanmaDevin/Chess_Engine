@@ -26,3 +26,9 @@ class GameState:
         self.board[move.endRow][move.endCol] = move.pieceMoved
         self.moveLog.append(move)  # for undoing the move
         self.whiteToMove = not self.whiteToMove  # swap player
+
+    def undoMove(self):
+        if len(self.moveLog) != 0:  # make sure a move was made
+            move = self.moveLog.pop()
+            self.board[move.startRow][move.startCol] = move.pieceMoved
+            self.board[move.endRow][move.endCol] = move.pieceCaptured

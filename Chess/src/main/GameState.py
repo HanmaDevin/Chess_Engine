@@ -19,6 +19,10 @@ class GameState:
             ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"]]
 
         self.whiteToMove = True
+        self.whiteKingLocation = (7, 4)
+        self.blackKingLocation = (0, 4)
+        self.checkMate = False
+        self.staleMate = False
         self.moveLog = []
         self.moveFunctions = {'P': self.getPawnMoves, 'R': self.getRookMoves, 'N': self.getKnightMoves,
                               'B': self.getBishopMoves, 'Q': self.getQueenMoves, 'K': self.getKingMoves}
@@ -28,6 +32,12 @@ class GameState:
         self.board[move.endRow][move.endCol] = move.pieceMoved
         self.moveLog.append(move)  # for undoing the move
         self.whiteToMove = not self.whiteToMove  # swap player
+        # update kings location
+        if move.pieceMoved == 'wK':
+            self.whiteKingLocation = (move.endRow, move.endCol)
+        if move.pieceMoved == 'bK':
+            self.blackKingLocation = (move.endRow, move.endCol)
+
 
     def undoMove(self):
         if len(self.moveLog) != 0:  # make sure a move was made before
@@ -35,9 +45,51 @@ class GameState:
             self.board[move.startRow][move.startCol] = move.pieceMoved
             self.board[move.endRow][move.endCol] = move.pieceCaptured
             self.whiteToMove = not self.whiteToMove
+            # update kings location
+            if move.pieceMoved == 'wK':
+                self.whiteKingLocation = (move.startRow, move.startCol)
+            if move.pieceMoved == 'bK':
+                self.blackKingLocation = (move.startRow, move.startCol)
 
     def getValidMoves(self):
-        return self.getAllPossibleMoves()  # for now only possible moves without checks
+        # 1.) get all moves
+        moves = self.getAllPossibleMoves()  # for now only possible moves without checks
+        # 2.) make the move for all moves
+        for i in range(len(moves)-1, -1, -1):  # when removing an elem. go backwards
+            self.makeMove(moves[i])
+            self.whiteToMove = not self.whiteToMove
+            # 3.) get all opponent moves
+            # 4.) check if opponent checks you
+            if self.inCheck():
+                moves.remove(moves[i])
+            self.whiteToMove = not self.whiteToMove
+            # 5.) if true move was not valid
+            self.undoMove()
+        if len(moves) == 0:  # either chechmate or stalemate
+            if self.inCheck():
+                self.checkMate = True
+            else:
+                self.staleMate = True
+        else:
+            self.checkMate = False
+            self.staleMate = False
+        return moves
+
+    def inCheck(self):
+        if self.whiteToMove:
+            return self.squareUnderAttack(self.whiteKingLocation[0], self.whiteKingLocation[1])
+        else:
+            return self.squareUnderAttack(self.blackKingLocation[0], self.blackKingLocation[1])
+
+    def squareUnderAttack(self, row, col):
+        self.whiteToMove = not self.whiteToMove
+        opponentMoves = self.getAllPossibleMoves()
+        self.whiteToMove = not self.whiteToMove
+        for move in opponentMoves:
+            if move.endRow == row and move.endCol == col:  # square under attack
+                return True
+
+        return False
 
     def getAllPossibleMoves(self):
         moves = []

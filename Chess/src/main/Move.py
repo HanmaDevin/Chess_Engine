@@ -1,4 +1,4 @@
-class Move:
+class Move():
     # maps keys to values
     # key : value
     # used for moves

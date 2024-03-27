@@ -55,7 +55,7 @@ def main():
             elif event.type == pg.KEYDOWN:
                 if event.key == pg.K_z:
                     gameState.undoMove()
-                    validMoves = gameState.getValidMoves()
+                    moveMade = True
 
         if moveMade:
             validMoves = gameState.getValidMoves()

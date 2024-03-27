@@ -2,7 +2,6 @@ import pygame as pg
 from Chess.src.main.GameState import GameState
 from Chess.src.main.Move import Move
 
-pg.init()
 WIDTH = HEIGHT = 512  # 400 good size as well
 DIMENSIONS = 8  # based off of standard chess board 8x8
 SQUARE_SIZE = HEIGHT // DIMENSIONS
@@ -35,15 +34,18 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 running = False
+            # mouse handler
             elif event.type == pg.MOUSEBUTTONDOWN:  # get mouse input
                 location = pg.mouse.get_pos()  # x & y location of the mouse
                 col = location[0] // SQUARE_SIZE
                 row = location[1] // SQUARE_SIZE
-                if squareSelected == (row, col):
+                if squareSelected == (row, col): # if user clicks same square twice
                     squareSelected = ()  # deselect
                     playerClicks = []  # clear player clicks
-                squareSelected = (row, col)
-                playerClicks.append(squareSelected)
+                else:
+                    squareSelected = (row, col)
+                    playerClicks.append(squareSelected)
+
                 if len(playerClicks) == 2:  # after second click
                     move = Move(playerClicks[0], playerClicks[1], gameState.board)
                     print(move.getChessNotation())
@@ -54,6 +56,7 @@ def main():
                         playerClicks = []
                     else:
                         playerClicks = [squareSelected]
+            # key handler
             elif event.type == pg.KEYDOWN:
                 if event.key == pg.K_z:
                     gameState.undoMove()

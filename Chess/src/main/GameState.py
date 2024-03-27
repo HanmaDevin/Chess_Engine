@@ -102,7 +102,15 @@ class GameState:
                     break
 
     def getKnightMoves(self, row, col, moves):
-        pass
+        knightMoves = ((-2, -1), (-1, -2), (-2, 1), (-1, 2), (1, -2), (1, 2), (2, -1), (2, 1))
+        ownColor = "w" if self.whiteToMove else "b"
+        for move in knightMoves:
+            endRow = row + move[0]
+            endCol = col + move[1]
+            if 0 <= endRow < 8 and 0 <= endCol < 8:
+                endPiece = self.board[endRow][endCol]
+                if endPiece[0] != ownColor:
+                    moves.append(Move((row, col), (endRow, endCol), self.board))
 
     def getBishopMoves(self, row, col, moves):
         directions = [(1, 1), (-1, 1), (1, -1), (-1, -1)]

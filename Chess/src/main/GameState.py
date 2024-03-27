@@ -59,30 +59,47 @@ class GameState:
                     moves.append(Move((row, col), (row - 2, col), self.board))
             if col - 1 >= 0:  # not capturing beyond edge
 
-                if self.board[row - 1][col-1][0] == 'b':  # there is a black piece to capture
-                    moves.append(Move((row, col), (row-1, col-1), self.board))
+                if self.board[row - 1][col - 1][0] == 'b':  # there is a black piece to capture
+                    moves.append(Move((row, col), (row - 1, col - 1), self.board))
 
             if col + 1 <= 7:  # not capturing beyond edge
-                if self.board[row-1][col+1][0] == 'b':
-                    moves.append(Move((row, col), (row-1, col+1), self.board))
+                if self.board[row - 1][col + 1][0] == 'b':
+                    moves.append(Move((row, col), (row - 1, col + 1), self.board))
 
         else:  # black pawn moves
-            if self.board[row+1][col] == "--":
-                moves.append(Move((row, col), (row+1, col), self.board))
+            if self.board[row + 1][col] == "--":
+                moves.append(Move((row, col), (row + 1, col), self.board))
 
-                if row == 1 and self.board[row+2][col] == "--":
-                    moves.append(Move((row, col), (row+2, col), self.board))
+                if row == 1 and self.board[row + 2][col] == "--":
+                    moves.append(Move((row, col), (row + 2, col), self.board))
 
             if col + 1 <= 7:  # not capturing beyond edge
-                if self.board[row+1][col+1][1] == 'w':  # there is a white piece to capture
-                    moves.append(Move((row, col), (row+1, col+1), self.board))
+                if self.board[row + 1][col + 1][1] == 'w':  # there is a white piece to capture
+                    moves.append(Move((row, col), (row + 1, col + 1), self.board))
 
             if col - 1 >= 0:  # not capturing beyond edge
-                if self.board[row+1][col-1][0] == 'w':
-                    moves.append(Move((row, col), (row+1, col-1), self.board))
+                if self.board[row + 1][col - 1][0] == 'w':
+                    moves.append(Move((row, col), (row + 1, col - 1), self.board))
+        # adding pawn promotion later
 
     def getRookMoves(self, row, col, moves):
-        pass
+        directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+        opposingColor = "b" if self.whiteToMove else "b"
+        for d in directions:
+            for i in range(1,8):
+                endRow = row + d[0] * i
+                endCol = col + d[1] * i
+                if 0 <= endRow < 8 and 0 <= endCol < 8:  # on board
+                    endPiece = self.board[endRow][endCol]
+                    if endPiece == "--":  # empty space
+                        moves.append(Move((row, col), (endRow, endCol), self.board))
+                    elif endPiece[0] == opposingColor:
+                        moves.append(Move((row, col), (endRow, endCol), self.board))
+                        break
+                    else:  # reached own piece
+                        break
+                else:  # off board
+                    break
 
     def getKnightMoves(self, row, col, moves):
         pass

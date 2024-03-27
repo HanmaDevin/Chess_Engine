@@ -116,68 +116,109 @@ class GameState:
         return moves
 
     def getPawnMoves(self, row, col, moves):
+        piecePinned = False
+        pinDirection = ()
+        for i in range(len(self.pins)-1, -1, -1):
+            if self.pins[i][0] == row and self.pins[i][1] == col:
+                piecePinned = True
+                pinDirection = (self.pins[i][2], self.pins[i][3])
+                self.pins.remove(self.pins[i])
+                break
+
         if self.whiteToMove:
-            if self.board[row - 1][col] == "--":
-                moves.append(Move((row, col), (row - 1, col), self.board))
-
-                if row == 6 and self.board[row - 2][col] == "--":  # 2. square in front of pawn is empty
-                    moves.append(Move((row, col), (row - 2, col), self.board))
-            if col - 1 >= 0:  # not capturing beyond edge
-
+            if self.board[row - 1][col] == "--":  # 1. square move
+                if not piecePinned or pinDirection == (-1, 0):
+                    moves.append(Move((row, col), (row - 1, col), self.board))
+                    if row == 6 and self.board[row - 2][col] == "--":  # 2. square move
+                        moves.append(Move((row, col), (row - 2, col), self.board))
+            # captures
+            if col - 1 >= 0:  # capture to left
                 if self.board[row - 1][col - 1][0] == 'b':  # there is a black piece to capture
-                    moves.append(Move((row, col), (row - 1, col - 1), self.board))
+                    if not piecePinned or pinDirection == (-1, -1):
+                        moves.append(Move((row, col), (row - 1, col - 1), self.board))
 
-            if col + 1 <= 7:  # not capturing beyond edge
+            if col + 1 <= 7:  # capture to right
                 if self.board[row - 1][col + 1][0] == 'b':
-                    moves.append(Move((row, col), (row - 1, col + 1), self.board))
+                    if not piecePinned or pinDirection == (-1, 1):
+                        moves.append(Move((row, col), (row - 1, col + 1), self.board))
 
         else:  # black pawn moves
-            if self.board[row + 1][col] == "--":
-                moves.append(Move((row, col), (row + 1, col), self.board))
-
-                if row == 1 and self.board[row + 2][col] == "--":
-                    moves.append(Move((row, col), (row + 2, col), self.board))
-
-            if col + 1 <= 7:  # not capturing beyond edge
+            if self.board[row + 1][col] == "--":  # 1. square move
+                if not piecePinned or pinDirection == (1, 0):
+                    moves.append(Move((row, col), (row + 1, col), self.board))
+                    if row == 1 and self.board[row + 2][col] == "--":  # 2. square move
+                        moves.append(Move((row, col), (row + 2, col), self.board))
+            # captures
+            if col + 1 <= 7:  # capture right
                 if self.board[row + 1][col + 1][1] == 'w':  # there is a white piece to capture
-                    moves.append(Move((row, col), (row + 1, col + 1), self.board))
+                    if not piecePinned or pinDirection == (1, 1):
+                        moves.append(Move((row, col), (row + 1, col + 1), self.board))
 
-            if col - 1 >= 0:  # not capturing beyond edge
+            if col - 1 >= 0:  # capture left
                 if self.board[row + 1][col - 1][0] == 'w':
-                    moves.append(Move((row, col), (row + 1, col - 1), self.board))
+                    if not piecePinned or pinDirection == (1, -1):
+                        moves.append(Move((row, col), (row + 1, col - 1), self.board))
         # adding pawn promotion later
 
     def getRookMoves(self, row, col, moves):
+        piecePinned = False
+        pinDirection = ()
+        for i in range(len(self.pins)-1, -1, -1):
+            if self.pins[i][0] == row and self.pins[i][1] == col:
+                piecePinned = True
+                pinDirection = (self.pins[i][2], self.pins[i][3])
+                if self.board[row][col][1] != 'Q':  # cannot remove queen from pin on rook moves
+                    self.pins.remove(self.pins[i])
+                break
+
         directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
-        opposingColor = "b" if self.whiteToMove else "b"
+        opposingColor = "b" if self.whiteToMove else "w"
         for direction in directions:
             for i in range(1, 8):
                 endRow = row + direction[0] * i
                 endCol = col + direction[1] * i
                 if 0 <= endRow < 8 and 0 <= endCol < 8:  # on board
-                    endPiece = self.board[endRow][endCol]
-                    if endPiece == "--":  # empty space
-                        moves.append(Move((row, col), (endRow, endCol), self.board))
-                    elif endPiece[0] == opposingColor:
-                        moves.append(Move((row, col), (endRow, endCol), self.board))
+                    if not piecePinned or pinDirection == direction or pinDirection == (-direction[0], -direction[1]):
+                        endPiece = self.board[endRow][endCol]
+                        if endPiece == "--":  # empty space
+                            moves.append(Move((row, col), (endRow, endCol), self.board))
+                        elif endPiece[0] == opposingColor:
+                            moves.append(Move((row, col), (endRow, endCol), self.board))
+                            break
+                        else:  # reached own piece
+                            break
+                    else:  # off board
                         break
-                    else:  # reached own piece
-                        break
-                else:  # off board
-                    break
 
     def getKnightMoves(self, row, col, moves):
+        piecePinned = False
+        for i in range(len(self.pins)-1, -1, -1):
+            if self.pins[i][0] == row and self.pins[i][1] == col:
+                piecePinned = True
+                self.pins.remove(self.pins[i])
+                break
+
         knightMoves = ((-2, -1), (-1, -2), (-2, 1), (-1, 2), (1, -2), (1, 2), (2, -1), (2, 1))
         ownColor = "w" if self.whiteToMove else "b"
         for move in knightMoves:
             endRow = row + move[0]
             endCol = col + move[1]
             if 0 <= endRow < 8 and 0 <= endCol < 8:
-                endPiece = self.board[endRow][endCol]
-                if endPiece[0] != ownColor:
-                    moves.append(Move((row, col), (endRow, endCol), self.board))
+                if not piecePinned:
+                    endPiece = self.board[endRow][endCol]
+                    if endPiece[0] != ownColor:
+                        moves.append(Move((row, col), (endRow, endCol), self.board))
 
     def getBishopMoves(self, row, col, moves):
+        piecePinned = False
+        pinDirection = ()
+        for i in range(len(self.pins)-1, -1, -1):
+            if self.pins[i][0] == row and self.pins[i][1] == col:
+                piecePinned = True
+                pinDirection = (self.pins[i][2], self.pins[i][3])
+                self.pins.remove(self.pins[i])
+                break
+
         directions = [(1, 1), (-1, 1), (1, -1), (-1, -1)]
         opposingColor = "b" if self.whiteToMove else "w"
         for direction in directions:
@@ -185,31 +226,45 @@ class GameState:
                 endRow = row + direction[0] * i
                 endCol = col + direction[1] * i
                 if 0 <= endRow < 8 and 0 <= endCol < 8:
-                    endPiece = self.board[endRow][endCol]
-                    if endPiece == "--":
-                        moves.append(Move((row, col), (endRow, endCol), self.board))
-                    elif endPiece[0] == opposingColor:
-                        moves.append(Move((row, col), (endRow, endCol), self.board))
+                    if not piecePinned or pinDirection == direction or pinDirection == (-direction[0], -direction[1]):
+                        endPiece = self.board[endRow][endCol]
+                        if endPiece == "--":
+                            moves.append(Move((row, col), (endRow, endCol), self.board))
+                        elif endPiece[0] == opposingColor:
+                            moves.append(Move((row, col), (endRow, endCol), self.board))
+                            break
+                        else:  # reached own piece
+                            break
+                    else:  # off board
                         break
-                    else:  # reached own piece
-                        break
-                else:  # off board
-                    break
 
     def getQueenMoves(self, row, col, moves):
         self.getRookMoves(row, col, moves)
         self.getBishopMoves(row, col, moves)
 
     def getKingMoves(self, row, col, moves):
-        kingMoves = [(-1, -1), (-1, 1), (1, -1), (1, 1), (0, -1), (0, 1), (-1, 0), (1, 0)]
+        rowMoves = (-1, -1, -1, 0, 0, 1, 1, 1)
+        colMoves = (-1, 0, 1, -1, 1, -1, 0, 1)
         ownColor = "w" if self.whiteToMove else "b"
         for i in range(8):
-            endRow = row + kingMoves[i][0]
-            endCol = col + kingMoves[i][1]
+            endRow = row + rowMoves[i]
+            endCol = col + colMoves[i]
             if 0 <= endRow < 8 and 0 <= endCol < 8:
                 endPiece = self.board[endRow][endCol]
-                if endPiece != ownColor:
-                    moves.append(Move((row, col), (endRow, endCol), self.board))
+                if endPiece[0] != ownColor:
+                    if ownColor == 'w':
+                        self.whiteKingLocation = (endRow, endCol)
+                    else:
+                        self. blackKingLocation = (endRow, endCol)
+                    inCheck, pins, checks = self.checkForPinsAndChecks()
+                    if not inCheck:
+                        moves.append(Move((row, col), (endRow, endCol), self.board))
+                    elif inCheck:
+                        if ownColor == 'w':
+                            self.whiteKingLocation = (row, col)
+                        else:
+                            self.blackKingLocation = (row, col)
+
 
     def checkForPinsAndChecks(self):
         pins = []

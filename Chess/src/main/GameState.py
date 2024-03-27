@@ -28,7 +28,28 @@ class GameState:
         self.whiteToMove = not self.whiteToMove  # swap player
 
     def undoMove(self):
-        if len(self.moveLog) != 0:  # make sure a move was made
+        if len(self.moveLog) != 0:  # make sure a move was made before
             move = self.moveLog.pop()
             self.board[move.startRow][move.startCol] = move.pieceMoved
             self.board[move.endRow][move.endCol] = move.pieceCaptured
+
+    def getValidMoves(self):
+        return self.allPossibleMoves()  # for now only possible moves without checks
+
+    def allPossibleMoves(self):
+        moves = []
+        for row in range(len(self.board)):
+            for col in range(len(self.board[row])):
+                turn = self.board[row][col][0]
+                if (turn == "w" and self.whiteToMove) or (turn == "b" and not self.whiteToMove):
+                    piece = self.board[row][col][1]
+                    if piece == 'P':
+                        self.getPawnMoves(row, col, moves)
+                    elif piece == 'R':
+                        self.getRookMoves(row, col, moves)
+
+    def getPawnMoves(self, row, col, moves):
+        pass
+
+    def getRookMoves(self, row, col, moves):
+        pass

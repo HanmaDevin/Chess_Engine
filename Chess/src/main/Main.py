@@ -25,6 +25,8 @@ def main():
     running = True
     screen.fill((0, 0, 0))  # White Background
     gameState = GameState()
+    validMoves = gameState.getValidMoves()
+    moveMade = False
     loadImages()
     squareSelected = ()  # no square selected initially
     playerClicks = []
@@ -45,13 +47,19 @@ def main():
                 if len(playerClicks) == 2:  # after second click
                     move = Move(playerClicks[0], playerClicks[1], gameState.board)
                     print(move.getChessNotation())
-                    gameState.makeMove(move)
+                    if move in validMoves:
+                        gameState.makeMove(move)
+                        moveMade = True
                     squareSelected = ()
                     playerClicks = []
             elif event.type == pg.KEYDOWN:
                 if event.key == pg.K_z:
                     gameState.undoMove()
+                    validMoves = gameState.getValidMoves()
 
+        if moveMade:
+            validMoves = gameState.getValidMoves()
+            moveMade = False
         drawGameState(screen, gameState)
         clock.tick(MAX_FPS)
         pg.display.flip()

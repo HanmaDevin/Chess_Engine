@@ -50,8 +50,10 @@ def main():
                     if move in validMoves:
                         gameState.makeMove(move)
                         moveMade = True
-                    squareSelected = ()
-                    playerClicks = []
+                        squareSelected = ()
+                        playerClicks = []
+                    else:
+                        playerClicks = [squareSelected]
             elif event.type == pg.KEYDOWN:
                 if event.key == pg.K_z:
                     gameState.undoMove()

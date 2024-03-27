@@ -132,7 +132,16 @@ class GameState:
                     break
 
     def getQueenMoves(self, row, col, moves):
-        pass
+        self.getRookMoves(row, col, moves)
+        self.getBishopMoves(row, col, moves)
 
     def getKingMoves(self, row, col, moves):
-        pass
+        kingMoves = [(-1, -1), (-1, 1), (1, -1), (1, 1), (0, -1), (0, 1), (-1, 0), (1, 0)]
+        ownColor = "w" if self.whiteToMove else "b"
+        for i in range(8):
+            endRow = row + kingMoves[i][0]
+            endCol = col + kingMoves[i][1]
+            if 0 <= endRow < 8 and 0 <= endCol < 8:
+                endPiece = self.board[endRow][endCol]
+                if endPiece != ownColor:
+                    moves.append(Move((row, col), (endRow, endCol), self.board))

@@ -49,12 +49,13 @@ def main():
                 if len(playerClicks) == 2:  # after second click
                     move = Move(playerClicks[0], playerClicks[1], gameState.board)
                     print(move.getChessNotation())
-                    if move in validMoves:
-                        gameState.makeMove(move)
-                        moveMade = True
-                        squareSelected = ()
-                        playerClicks = []
-                    else:
+                    for i in range(len(validMoves)):
+                        if move == validMoves[i]:
+                            gameState.makeMove(validMoves[i])
+                            moveMade = True
+                            squareSelected = ()
+                            playerClicks = []
+                    if not moveMade:
                         playerClicks = [squareSelected]
             # key handler
             elif event.type == pg.KEYDOWN:

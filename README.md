@@ -1,4 +1,8 @@
 # Chess_Engine
+## Project Status
+
+Still in development, may contain bugs. 
+
 ## About
 
 Like the name suggests it's an engine which you can 

@@ -14,6 +14,13 @@ This is a project based on this tutorial:
 ## How to run
 
 Just go to the scripts folder and run the run.sh script.
+You can do it with the following commands in your terminal:
+1. open a terminal in the scripts directory, right click and use the option "open terminal here"
+2. then type this in your terminal
+```shell
+chmod -x ./run.sh
+./run.sh
+```
 If that does not work, I will fix this in the future, 
 just download the requirements down below
 

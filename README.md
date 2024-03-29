@@ -29,10 +29,10 @@ lastly run the following commands:
 chmod +x ./run.sh
 ./run.sh
 ```
-### For Windows
+### Windows
 
 1. install git. if you do not know how, [visit this link](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-2. open a terminal. You can use this shortcut "Win + X, I"
+2. open a terminal. You can use this shortcut "Win + X, I" or "Win + R" and type cmd
 3. setup git [more information here](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)
 4. then type this in your terminal:
 ```shell

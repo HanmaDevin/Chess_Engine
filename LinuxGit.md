@@ -13,7 +13,7 @@ sudo apt upgrade
 sudo apt install git
 ```
 
-See the Git *setup.md* in the code directory 
+See the Git *GitSetup.md* in the code directory 
 
 
 ## *Red Hat*-based linux systems
@@ -24,4 +24,4 @@ See the Git *setup.md* in the code directory
 sudo yum upgrade
 sudo yum install git
 ```
-See the Git *setup.md* in the code directory
+See the Git *GitSetup.md* in the code directory

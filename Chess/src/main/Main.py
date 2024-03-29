@@ -7,7 +7,7 @@ DIMENSIONS = 8  # based off of standard chess board 8x8
 SQUARE_SIZE = HEIGHT // DIMENSIONS
 MAX_FPS = 15
 IMAGES = {}
-
+pg.display.set_caption("Chess")  # name of window title
 
 def loadImages():
     pieces = ['wP', 'wB', 'wR', 'wN', 'wQ', 'wK', 'bP', 'bB', 'bR', 'bN', 'bQ', 'bK']

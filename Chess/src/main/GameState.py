@@ -36,7 +36,7 @@ class GameState:
         # update kings location
         if move.pieceMoved == 'wK':
             self.whiteKingLocation = (move.endRow, move.endCol)
-        if move.pieceMoved == 'bK':
+        elif move.pieceMoved == 'bK':
             self.blackKingLocation = (move.endRow, move.endCol)
 
     def undoMove(self):
@@ -48,7 +48,7 @@ class GameState:
             # update kings location
             if move.pieceMoved == 'wK':
                 self.whiteKingLocation = (move.startRow, move.startCol)
-            if move.pieceMoved == 'bK':
+            elif move.pieceMoved == 'bK':
                 self.blackKingLocation = (move.startRow, move.startCol)
 
     def getValidMoves(self):
@@ -72,8 +72,7 @@ class GameState:
                     validSquares = [(checkRow, checkCol)]
                 else:
                     for i in range(1, 8):
-                        validSquare = (
-                        kingRow + check[2] * i, kingCol + check[3] * i)  # check[2] and check[3] are directions
+                        validSquare = (kingRow + check[2] * i, kingCol + check[3] * i)  # check[2] and check[3] are directions
                         validSquares.append(validSquare)
                         if validSquare[0] == checkRow and validSquare[1] == checkCol:
                             break
@@ -283,12 +282,12 @@ class GameState:
 
         # check for checks and pins in all directions from king
         directions = ((-1, 0), (0, -1), (1, 0), (0, 1), (-1, -1), (1, -1), (-1, 1), (1, 1))
-        for i in range(len(directions)):
-            direction = directions[i]
+        for j in range(len(directions)):
+            direction = directions[j]
             possiblePin = ()
-            for j in range(1, 8):
-                endRow = startRow + direction[0] * j
-                endCol = startCol + direction[1] * j
+            for i in range(1, 8):
+                endRow = startRow + direction[0] * i
+                endCol = startCol + direction[1] * i
                 if 0 <= endRow < 8 and 0 <= endCol < 8:
                     endPiece = self.board[endRow][endCol]
                     if endPiece[0] == ownColor:
@@ -299,11 +298,11 @@ class GameState:
                     elif endPiece[0] == opponentColor:
                         pieceType = endPiece[1]
                         # checking the piece type
-                        if (0 <= i <= 3 and pieceType == 'R') or \
-                                (4 <= i <= 7 and pieceType == 'B') or \
-                                (j == 1 and pieceType == 'P' and ((opponentColor == 'w' and 6 <= i <= 7) or
-                                                             (opponentColor == 'b' and 4 <= i <= 5))) or \
-                                (pieceType == 'Q') or (j == 1 and pieceType == 'K'):
+                        if (0 <= j <= 3 and pieceType == 'R') or \
+                                (4 <= j <= 7 and pieceType == 'B') or \
+                                (i == 1 and pieceType == 'P' and ((opponentColor == 'w' and 6 <= j <= 7) or
+                                                             (opponentColor == 'b' and 4 <= j <= 5))) or \
+                                (pieceType == 'Q') or (i == 1 and pieceType == 'K'):
                             if possiblePin == ():
                                 inCheck = True
                                 checks.append((endRow, endCol, direction[0], direction[1]))

@@ -13,15 +13,16 @@ This is a project based on this tutorial:
 ## How to run
 ### Linux and Mac
 
-1. install git. if you do not know how, read the appropriate *.md file in the code section
-2. open a terminal. On Linux you can use the shortcut "Strg + Ctrl + T" 
-3. then type this in your terminal:
+1. install git. if you do not know how, [visit this link](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+2. open a terminal. On Linux you can use the shortcut "Strg + Ctrl + T". On Mac use "Command + Space" and type "Terminal"
+3. setup git [more information here](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)
+4. then type this in your terminal:
 ```shell
 git clone https://github.com/HanmaDevin/Chess_Engine
 ```
 change directory with this command
 ```shell
-cd Chess/scripts
+cd Chess_Engine/Chess/scripts
 ```
 lastly run the following commands:
 ```shell
@@ -30,19 +31,20 @@ chmod +x ./run.sh
 ```
 ### For Windows
 
-1. install git. if you do not know how, read the git installation section
+1. install git. if you do not know how, [visit this link](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 2. open a terminal. You can use this shortcut "Win + X, I"
-3. then type this in your terminal:
+3. setup git [more information here](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)
+4. then type this in your terminal:
 ```shell
 git clone https://github.com/HanmaDevin/Chess_Engine
 ```
 change directory with this command
 ```shell
-cd Chess/scripts
+cd Chess_Engine/Chess/scripts
 ```
 lastly run the following command:
 ```shell
-run.exe
+start run.exe
 ```
 
 ## Requirements

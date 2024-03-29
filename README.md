@@ -14,8 +14,26 @@ This is a project based on this tutorial:
 ## How to run
 ### For Linux and Mac
 
-1. install git. if you do not now how read the git installation section
-2. open a terminal. On Linux you can use the shortcut "Strg + Ctrl + t" then type this in your terminal:
+1. install git. if you do not know how, read the git installation section
+2. open a terminal. On Linux you can use the shortcut "Strg + Ctrl + T" 
+3. then type this in your terminal:
+```shell
+git clone https://github.com/HanmaDevin/Chess_Engine
+```
+change directory with this command
+```shell
+cd Chess/scripts
+```
+lastly run the following commands:
+```shell
+chmod +x ./run.sh
+./run.sh
+```
+### For Windows
+
+1. install git. if you do not know how, read the git installation section
+2. open a terminal. 
+3. then type this in your terminal:
 ```shell
 git clone https://github.com/HanmaDevin/Chess_Engine
 ```

@@ -49,7 +49,7 @@ start run.bat
 
 ## Requirements
 
-You need to install python and pygame
+You need to install python and pygame, if you startet the application with the script, you can ignore this section.
 
 You can download python here:
 [Python](https://www.python.org/downloads/)

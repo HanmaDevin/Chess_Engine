@@ -13,16 +13,13 @@ This is a project based on this tutorial:
 
 ## How to run
 
-Just go to the scripts folder and run the run.sh script.
-You can do it with the following commands in your terminal:
-1. open a terminal in the scripts directory, right click and use the option "open terminal here"
-2. then type this in your terminal
+1. install git. if you do not now how read the git installation section
+2. open a terminal. on windows you can use the shortcut "Win + x" then press i
+on Linux you can use the shortcut "Strg + Ctrl + t"
+ then type this in your terminal
 ```shell
-chmod -x ./run.sh
-./run.sh
+git clone 
 ```
-If that does not work, I will fix this in the future, 
-just download the requirements down below
 
 ## Requirements
 
@@ -31,7 +28,7 @@ You need to install python and pygame
 You can download python here:
 [Python](https://www.python.org/downloads/)
 
-Afterward check if the installation was successful
+Afterward check if the installation was successful. Type in your terminal:
 ```shell
 python3 --version
 ```
@@ -39,7 +36,7 @@ python3 --version
 Pygame is installed via the pip command, which comes 
 with the python install
 
-Run the following in your preferred shell
+Run the following in your terminal:
 
 ```shell
 pip install pygame

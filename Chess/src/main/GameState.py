@@ -150,7 +150,7 @@ class GameState:
                         moves.append(Move((row, col), (row + 2, col), self.board))
             # captures
             if col + 1 <= 7:  # capture right
-                if self.board[row + 1][col + 1][1] == 'w':  # there is a white piece to capture
+                if self.board[row + 1][col + 1][0] == 'w':  # there is a white piece to capture
                     if not piecePinned or pinDirection == (1, 1):
                         moves.append(Move((row, col), (row + 1, col + 1), self.board))
 
@@ -297,13 +297,13 @@ class GameState:
                         else:
                             break
                     elif endPiece[0] == opponentColor:
-                        type = endPiece[1]
+                        pieceType = endPiece[1]
                         # checking the piece type
-                        if (0 <= i <= 3 and type == 'R') or \
-                                (4 <= i <= 7 and type == 'B') or \
-                                (j == 1 and type == 'P' and ((opponentColor == 'w' and 6 <= i <= 7) or
+                        if (0 <= i <= 3 and pieceType == 'R') or \
+                                (4 <= i <= 7 and pieceType == 'B') or \
+                                (j == 1 and pieceType == 'P' and ((opponentColor == 'w' and 6 <= i <= 7) or
                                                              (opponentColor == 'b' and 4 <= i <= 5))) or \
-                                (type == 'Q') or (j == 1 and type == 'K'):
+                                (pieceType == 'Q') or (j == 1 and pieceType == 'K'):
                             if possiblePin == ():
                                 inCheck = True
                                 checks.append((endRow, endCol, direction[0], direction[1]))

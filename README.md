@@ -12,13 +12,21 @@ This is a project based on this tutorial:
 [YouTube](https://www.youtube.com/watch?v=EnYui0e73Rs)
 
 ## How to run
+### For Linux and Mac
 
 1. install git. if you do not now how read the git installation section
-2. open a terminal. on windows you can use the shortcut "Win + x" then press i
-on Linux you can use the shortcut "Strg + Ctrl + t"
- then type this in your terminal
+2. open a terminal. On Linux you can use the shortcut "Strg + Ctrl + t" then type this in your terminal:
 ```shell
-git clone 
+git clone https://github.com/HanmaDevin/Chess_Engine
+```
+change directory with this command
+```shell
+cd Chess/scripts
+```
+lastly run the following commands:
+```shell
+chmod +x ./run.sh
+./run.sh
 ```
 
 ## Requirements

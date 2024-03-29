@@ -13,7 +13,7 @@ This is a project based on this tutorial:
 ## How to run
 ### Linux and Mac
 
-1. install git. if you do not know how, read the git.md
+1. install git. if you do not know how, read the appropriate *.md file in the code section
 2. open a terminal. On Linux you can use the shortcut "Strg + Ctrl + T" 
 3. then type this in your terminal:
 ```shell

@@ -9,6 +9,7 @@ MAX_FPS = 15
 IMAGES = {}
 pg.display.set_caption("Chess")  # name of window title
 
+
 def loadImages():
     pieces = ['wP', 'wB', 'wR', 'wN', 'wQ', 'wK', 'bP', 'bB', 'bR', 'bN', 'bQ', 'bK']
     for piece in pieces:
@@ -39,7 +40,7 @@ def main():
                 location = pg.mouse.get_pos()  # x & y location of the mouse
                 col = location[0] // SQUARE_SIZE
                 row = location[1] // SQUARE_SIZE
-                if squareSelected == (row, col): # if user clicks same square twice
+                if squareSelected == (row, col):  # if user clicks same square twice
                     squareSelected = ()  # deselect
                     playerClicks = []  # clear player clicks
                 else:

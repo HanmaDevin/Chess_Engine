@@ -44,7 +44,7 @@ cd Chess_Engine/scripts
 ```
 lastly run the following command:
 ```shell
-start run.exe
+start run.bat
 ```
 
 ## Requirements

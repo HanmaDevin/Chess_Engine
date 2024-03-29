@@ -13,7 +13,7 @@ This is a project based on this tutorial:
 ## How to run
 ### Linux and Mac
 
-1. install git. if you do not know how, read the git installation section
+1. install git. if you do not know how, read the git.md
 2. open a terminal. On Linux you can use the shortcut "Strg + Ctrl + T" 
 3. then type this in your terminal:
 ```shell
@@ -69,3 +69,4 @@ Now check if it was successful
 ```shell
 pygame --version
 ```
+

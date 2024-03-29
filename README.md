@@ -5,14 +5,13 @@ Still in development, may contain bugs.
 
 ## About
 
-Like the name suggests it's an engine which you can 
-play against
+Like the name suggests it's an engine which you can play against
 
 This is a project based on this tutorial:
 [YouTube](https://www.youtube.com/watch?v=EnYui0e73Rs)
 
 ## How to run
-### For Linux and Mac
+### Linux and Mac
 
 1. install git. if you do not know how, read the git installation section
 2. open a terminal. On Linux you can use the shortcut "Strg + Ctrl + T" 
@@ -32,7 +31,7 @@ chmod +x ./run.sh
 ### For Windows
 
 1. install git. if you do not know how, read the git installation section
-2. open a terminal. 
+2. open a terminal. You can use this shortcut "Win + X, I"
 3. then type this in your terminal:
 ```shell
 git clone https://github.com/HanmaDevin/Chess_Engine
@@ -41,10 +40,9 @@ change directory with this command
 ```shell
 cd Chess/scripts
 ```
-lastly run the following commands:
+lastly run the following command:
 ```shell
-chmod +x ./run.sh
-./run.sh
+run.exe
 ```
 
 ## Requirements

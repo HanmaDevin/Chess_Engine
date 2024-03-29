@@ -13,7 +13,7 @@ sudo apt upgrade
 sudo apt install git
 ```
 
-**You can use *Git* now.**
+See the Git *setup.md* in the code directory 
 
 
 ## *Red Hat*-based linux systems
@@ -24,5 +24,4 @@ sudo apt install git
 sudo yum upgrade
 sudo yum install git
 ```
-
-**You can use *Git* now.**
+See the Git *setup.md* in the code directory

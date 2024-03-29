@@ -22,7 +22,7 @@ git clone https://github.com/HanmaDevin/Chess_Engine
 ```
 change directory with this command
 ```shell
-cd Chess_Engine/Chess/scripts
+cd Chess_Engine/scripts
 ```
 lastly run the following commands:
 ```shell
@@ -40,7 +40,7 @@ git clone https://github.com/HanmaDevin/Chess_Engine
 ```
 change directory with this command
 ```shell
-cd Chess_Engine/Chess/scripts
+cd Chess_Engine/scripts
 ```
 lastly run the following command:
 ```shell

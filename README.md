@@ -22,12 +22,11 @@ git clone https://github.com/HanmaDevin/Chess_Engine
 ```
 change directory with this command
 ```shell
-cd Chess_Engine/scripts
+cd Chess_Engine/Chess/src/main
 ```
 lastly run the following commands:
 ```shell
-chmod +x ./run.sh
-./run.sh
+python3 Main.py 
 ```
 ### Windows
 
@@ -40,16 +39,16 @@ git clone https://github.com/HanmaDevin/Chess_Engine
 ```
 change directory with this command
 ```shell
-cd Chess_Engine/scripts
+cd Chess_Engine/Chess/src/main
 ```
 lastly run the following command:
 ```shell
-start run.bat
+python3 Main.py
 ```
 
 ## Requirements
 
-You need to install python and pygame, if you startet the application with the script, you can ignore this section.
+You need to install python and pygame
 
 You can download python here:
 [Python](https://www.python.org/downloads/)

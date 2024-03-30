@@ -24,7 +24,7 @@ change directory with this command
 ```shell
 cd Chess_Engine/Chess/src/main
 ```
-lastly run the following commands:
+lastly run the following command:
 ```shell
 python3 Main.py 
 ```

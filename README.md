@@ -1,7 +1,8 @@
 # Chess_Engine
 ## Project Status
 
-Still in development, may contain bugs. 
+Still in development, may contain bugs. If someone wants to help, feel free to do so.
+The Game is playable to a degree. 
 
 ## About
 

@@ -39,6 +39,11 @@ class GameState:
         elif move.pieceMoved == 'bK':
             self.blackKingLocation = (move.endRow, move.endCol)
 
+        # pawn promotion
+        # only to queen for now
+        if move.isPawnPromotion:
+            self.board[move.endRow][move.endCol] = move.pieceMoved[0] + 'Q'
+
     def undoMove(self):
         if len(self.moveLog) != 0:  # make sure a move was made before
             move = self.moveLog.pop()
